@@ -4,8 +4,12 @@ import React, {
   Dispatch,
   SetStateAction,
 } from "react";
+import { BrowserRouter, Link, Route } from "react-router-dom";
 import "./App.css";
+import Header from "./components/Header";
+import Match from "./components/Match";
 import MatchCreation from "./components/MatchCreation";
+import MatchDataProvider from "./components/MatchDataProvider";
 import Matches from "./components/Matches";
 
 import { State } from "./state/State";
@@ -20,12 +24,12 @@ const defaultState: State = {
   ],
 };
 
-interface contextValue {
+interface ContextValue {
   state: State;
   setState?: Dispatch<SetStateAction<State>>;
 }
 
-const contextValue: contextValue = {
+const contextValue: ContextValue = {
   state: defaultState,
 };
 
@@ -37,8 +41,12 @@ function App() {
   return (
     <div className="App">
       <context.Provider value={{ state, setState }}>
-        <MatchCreation />
-        <Matches />
+        <BrowserRouter>
+          <Route path="/" component={Header} />
+          <Route path="/" exact component={Matches} />
+          <Route path="/create-match" exact component={MatchCreation} />
+          <Route path="/match/:id" exact component={MatchDataProvider} />
+        </BrowserRouter>
       </context.Provider>
     </div>
   );

@@ -3,6 +3,7 @@ import { Friend as FriendData } from "../state/Friend";
 import { createMatch } from "../state/Match";
 import Friend from "./Friend";
 import { context } from "../App";
+import { RouteChildrenProps } from "react-router-dom";
 
 interface FriendsListProps {
   onFriendSelection: (friendData: FriendData) => void;
@@ -63,7 +64,7 @@ const SelectedFriends = (prop: SelectedFriendsProp) => {
   );
 };
 
-const MatchCreation = () => {
+const MatchCreation = (props: RouteChildrenProps) => {
   const { state, setState } = useContext(context);
 
   const initialSelectedFriendsData: Array<FriendData> = [];
@@ -98,6 +99,8 @@ const MatchCreation = () => {
     }
 
     setSelectedFriendsData(initialSelectedFriendsData);
+
+    props.history.push(`/match/${state.matches.length - 1}`);
   }
 
   return (

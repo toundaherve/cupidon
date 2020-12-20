@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { Friend as FriendData } from "../state/Friend";
 
@@ -12,9 +13,7 @@ const Friend = (props: FriendProps) => {
     <div className="friend">
       <img className="friend-image" src={friendData.image} />
       <h3 className="friend-name">{friendData.name}</h3>
-      <p className="friend-facebookID">
-        <a href="#">{friendData.facebookID}</a>
-      </p>
+      <p className="friend-facebookID">{friendData.facebookID}</p>
     </div>
   );
 };
