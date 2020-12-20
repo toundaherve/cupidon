@@ -32,10 +32,11 @@ const FriendsList = (props: FriendsListProps) => {
 interface SelectedFriendsProp {
   selectedFriendsData: Array<FriendData>;
   onSelectionValidation: () => void;
+  onFriendRemove: (friend: FriendData) => void;
 }
 
 const SelectedFriends = (prop: SelectedFriendsProp) => {
-  const { selectedFriendsData, onSelectionValidation } = prop;
+  const { selectedFriendsData, onSelectionValidation, onFriendRemove } = prop;
   return (
     <div className="selected-friends-container">
       <h2 className="selected-friends-title">Selected Friends</h2>
@@ -43,6 +44,12 @@ const SelectedFriends = (prop: SelectedFriendsProp) => {
         {selectedFriendsData.map((friendData, idx) => (
           <li className="friends-list-item" key={idx}>
             <Friend friendData={friendData} />
+            <button
+              className="friend-list-item-remove"
+              onClick={() => onFriendRemove(friendData)}
+            >
+              Remove
+            </button>
           </li>
         ))}
       </ul>
@@ -69,6 +76,14 @@ const MatchCreation = () => {
     setSelectedFriendsData([...selectedFriendsData, friendData]);
   }
 
+  function handleFriendRemoval(removableFriendData: FriendData) {
+    setSelectedFriendsData(
+      selectedFriendsData.filter(
+        (friendData) => friendData.facebookID !== removableFriendData.facebookID
+      )
+    );
+  }
+
   function handleMatchCreation() {
     const newMatch = createMatch(
       selectedFriendsData[0],
@@ -91,6 +106,7 @@ const MatchCreation = () => {
       <SelectedFriends
         selectedFriendsData={selectedFriendsData}
         onSelectionValidation={handleMatchCreation}
+        onFriendRemove={handleFriendRemoval}
       />
       <FriendsList onFriendSelection={handleFriendSelection} />
     </div>
