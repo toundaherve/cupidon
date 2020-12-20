@@ -2,12 +2,12 @@ import React from "react";
 
 import { Friend as FriendData } from "../state/Friend";
 
-interface FriendProp {
+interface FriendProps {
   friendData: FriendData;
 }
 
-const Friend = (prop: FriendProp) => {
-  const friendData = prop.friendData;
+const Friend = (props: FriendProps) => {
+  const { friendData } = props;
   return (
     <div className="friend">
       <img className="friend-image" src={friendData.image} />

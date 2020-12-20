@@ -4,18 +4,23 @@ import { createMatch } from "../state/Match";
 import Friend from "./Friend";
 import { context } from "../App";
 
-interface FriendsListProp {
+interface FriendsListProps {
   onFriendSelection: (friendData: FriendData) => void;
 }
 
-const FriendsList = (prop: FriendsListProp) => {
-  const state = useContext(context);
+const FriendsList = (props: FriendsListProps) => {
+  const { state } = useContext(context);
+  const { onFriendSelection } = props;
   return (
     <div className="friends-list-container">
       <h2 className="friends-list-title">My friends</h2>
       <ul className="friends-list">
         {state.friends.map((friendData, idx) => (
-          <li className="friends-list-item" key={idx}>
+          <li
+            className="friends-list-item"
+            key={idx}
+            onClick={() => onFriendSelection(friendData)}
+          >
             <Friend friendData={friendData} />
           </li>
         ))}
@@ -35,8 +40,8 @@ const SelectedFriends = (prop: SelectedFriendsProp) => {
     <div className="selected-friends-container">
       <h2 className="selected-friends-title">Selected Friends</h2>
       <ul className="seleted-friends-list">
-        {selectedFriendsData.map((friendData) => (
-          <li className="friends-list-item">
+        {selectedFriendsData.map((friendData, idx) => (
+          <li className="friends-list-item" key={idx}>
             <Friend friendData={friendData} />
           </li>
         ))}
@@ -52,7 +57,7 @@ const SelectedFriends = (prop: SelectedFriendsProp) => {
 };
 
 const MatchCreation = () => {
-  const state = useContext(context);
+  const { state } = useContext(context);
 
   const initialSelectedFriendsData: Array<FriendData> = [];
 
@@ -61,7 +66,6 @@ const MatchCreation = () => {
   );
 
   function handleFriendSelection(friendData: FriendData) {
-    console.log("Handling friend selection", friendData);
     setSelectedFriendsData([...selectedFriendsData, friendData]);
   }
 

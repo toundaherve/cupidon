@@ -1,4 +1,9 @@
-import React, { createContext, useState } from "react";
+import React, {
+  createContext,
+  useState,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import "./App.css";
 import MatchCreation from "./components/MatchCreation";
 
@@ -14,14 +19,23 @@ const defaultState: State = {
   ],
 };
 
-export const context = createContext(defaultState);
+interface contextValue {
+  state: State;
+  setState?: Dispatch<SetStateAction<State>>;
+}
+
+const contextValue: contextValue = {
+  state: defaultState,
+};
+
+export const context = createContext(contextValue);
 
 function App() {
   const [state, setState] = useState(defaultState);
 
   return (
     <div className="App">
-      <context.Provider value={state}>
+      <context.Provider value={{ state, setState }}>
         <MatchCreation />
       </context.Provider>
     </div>
