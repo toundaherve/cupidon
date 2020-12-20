@@ -6,6 +6,7 @@ import React, {
 } from "react";
 import "./App.css";
 import MatchCreation from "./components/MatchCreation";
+import Matches from "./components/Matches";
 
 import { State } from "./state/State";
 
@@ -37,6 +38,7 @@ function App() {
     <div className="App">
       <context.Provider value={{ state, setState }}>
         <MatchCreation />
+        <Matches />
       </context.Provider>
     </div>
   );

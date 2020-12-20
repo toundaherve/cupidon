@@ -57,7 +57,7 @@ const SelectedFriends = (prop: SelectedFriendsProp) => {
 };
 
 const MatchCreation = () => {
-  const { state } = useContext(context);
+  const { state, setState } = useContext(context);
 
   const initialSelectedFriendsData: Array<FriendData> = [];
 
@@ -70,12 +70,19 @@ const MatchCreation = () => {
   }
 
   function handleMatchCreation() {
-    console.log("Handling match creation", selectedFriendsData);
     const newMatch = createMatch(
       selectedFriendsData[0],
       selectedFriendsData[1]
     );
+
     state.matches.push(newMatch);
+    if (setState) {
+      setState({ ...state });
+    } else {
+      throw new Error("Missing setState in Context");
+    }
+
+    setSelectedFriendsData(initialSelectedFriendsData);
   }
 
   return (

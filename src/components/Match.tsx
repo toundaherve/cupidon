@@ -1,9 +1,9 @@
 import React from "react";
-import { Match, Activity } from "../state/Match";
+import { Match as MatchData, Activity as ActivityData } from "../state/Match";
 import Friend from "./Friend";
 
 interface ActivityProp {
-  activityData: Activity;
+  activityData: ActivityData;
 }
 
 const Activity = (prop: ActivityProp) => {
@@ -12,18 +12,18 @@ const Activity = (prop: ActivityProp) => {
     <div className="activity">
       <ul className="activity-list">
         <li className="activity-item">
-          <h3>
+          <p>
             Has received notification: {activityData.hasReceivedNotification}
-          </h3>
+          </p>
         </li>
         <li className="activity-item">
-          <h3>Has seen notification: {activityData.hasSeenNotification}</h3>
+          <p>Has seen notification: {activityData.hasSeenNotification}</p>
         </li>
         <li className="activity-item">
-          <h3>Has started interacting: {activityData.hasStartedInteracting}</h3>
+          <p>Has started interacting: {activityData.hasStartedInteracting}</p>
         </li>
         <li className="activity-item">
-          <h3>Last interaction time: {activityData.lastIteractionTime}</h3>
+          <p>Last interaction time: {activityData.lastIteractionTime}</p>
         </li>
       </ul>
     </div>
@@ -31,7 +31,7 @@ const Activity = (prop: ActivityProp) => {
 };
 
 interface MatchProp {
-  matchData: Match;
+  matchData: MatchData;
 }
 
 const Match = (prop: MatchProp) => {
@@ -52,3 +52,5 @@ const Match = (prop: MatchProp) => {
     </div>
   );
 };
+
+export default Match;
