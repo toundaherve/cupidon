@@ -32,7 +32,7 @@ const MatchDataProvider = (
     );
   }
 
-  return <Match matchData={matchData} />;
+  return <Match matchData={matchData} showActivity />;
 };
 
 export default MatchDataProvider;

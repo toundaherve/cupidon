@@ -30,23 +30,24 @@ const Activity = (prop: ActivityProp) => {
   );
 };
 
-interface MatchProp {
+interface MatchProps {
   matchData: MatchData;
+  showActivity?: boolean;
 }
 
-const Match = (prop: MatchProp) => {
-  const { matchData } = prop;
+const Match = (props: MatchProps) => {
+  const { matchData, showActivity = false } = props;
   return (
     <div className="match">
       <div className="match-friends">
         <div className="match-friend">
           <Friend friendData={matchData.friends[0]} />
-          <Activity activityData={matchData.activity[0]} />
+          {showActivity && <Activity activityData={matchData.activity[0]} />}
         </div>
 
         <div className="match-friend">
           <Friend friendData={matchData.friends[1]} />
-          <Activity activityData={matchData.activity[1]} />
+          {showActivity && <Activity activityData={matchData.activity[1]} />}
         </div>
       </div>
     </div>
